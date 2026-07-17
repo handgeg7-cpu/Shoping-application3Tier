@@ -8,6 +8,7 @@ const pool = new Pool({
   database: process.env.DB_NAME || 'shopdb'
 });
 
+
 async function initializeDatabase() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS products (
