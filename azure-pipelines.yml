@@ -44,7 +44,7 @@ stages:
     - script: |
        echo "Current Directory:"
        pwd
-       
+
        echo "Repository Structure:"
        ls -R
       displayName: "Debug Repository Structure"
@@ -53,6 +53,19 @@ stages:
         cd backend
          docker build -t $(imageRepository):$(tag) -f Dockerfile .
       displayName: 'Build Docker Image'
+    - script: |
+         docker images
+      displayName: 'List Docker Images'
+
+    - script: |
+        docker tag \
+        $(imageRepository):$(tag) \
+        shopingapp.azurecr.io/$(imageRepository):$(tag)
+
+          docker tag \
+          $(imageRepository):$(tag) \
+          shopingapp.azurecr.io/$(imageRepository):latest
+      displayName: 'Tag Image for ACR'
 
     - script: |
         docker images
