@@ -59,14 +59,14 @@ stages:
       displayName: 'Login to Azure Container Registry'
       inputs:
         command: login
-        containerRegistry: 'shopingapp'
+        containerRegistry: 'Dockerconnection'
 
     - task: Docker@2
       displayName: 'Push Image'
       inputs:
         command: push
         repository: '$(imageRepository)'
-        containerRegistry: 'shopingapp'
+        containerRegistry: 'Dockerconnection'
         tags: |
           $(tag)
           latest
