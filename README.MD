@@ -324,4 +324,131 @@ CMD
 Stage 1>> 
   I have started Building docker Images
   >> docker compose up -d
+
+
+  Now I push code to gitub
+  then azure devops
+
+  andnow starting with pipeline 
+
+  In Pipeline we used agent like  
+    >> type of agent 
+
+    Interview Question 1
+What is an Agent in Azure DevOps?
+Interview Answer (Senior Level)
+
+An Agent is a machine that executes the tasks defined in an Azure DevOps pipeline. It acts as the execution environment where our pipeline runs.
+
+When a developer pushes code to GitHub or Azure Repos, the pipeline itself doesn't build the application. Instead, Azure DevOps assigns the job to an available agent.
+
+That agent performs all the tasks such as:
+
+>>Checking out the source code
+>>Installing required software or dependencies
+Building the application
+Running unit tests
+Building the Docker image
+Pushing the Docker image to Azure Container Registry (ACR)
+Deploying the application to AKS or another environment
+
+So, an agent is simply the machine that executes the pipeline.
+
+Real-World Example
+
+Suppose your pipeline contains:
+steps:
+- checkout: self
+
+- script: mvn clean package
+
+- task: Docker@2
+
+- task: KubernetesManifest@1
+
+
+Who executes these commands?
+Not Azure DevOps itself.
+An agent executes them.
+Think of Azure DevOps as the manager and the agent as the worker.
+
+What are the types of Agents in Azure DevOps?
+Azure DevOps Agents
+        │
+        ├── 1. Microsoft-hosted Agent
+        │
+        └── 2. Self-hosted Agent
+
+        Definition
+1. Microsoft-hosted Agent
+A Microsoft-hosted agent is a virtual machine that Microsoft provides and manages for you. Whenever a pipeline starts, Azure DevOps creates a fresh VM, runs your pipeline, and then deletes the VM after the job completes
+Exmaple:
+pool:
+  vmImage: ubuntu-latest
+
   
+  Advantages
+No installation required
+No maintenance
+Always updated
+Fast to get started
+
+Disadvantages
+Limited free minutes (depending on your plan)
+Cannot install permanent custom software
+A new VM is created for every pipeline run
+
+==========================================================================================
+
+2. Self-hosted Agent
+Definition
+
+A Self-hosted agent is a machine that you install and register with Azure DevOps. It can be:
+
+Windows Server
+Linux Server
+Virtual Machine
+Physical Machine
+
+Azure DevOps sends pipeline jobs to that machine
+
+`Advantages`
+Full control over the machine
+Can install any software
+Faster for repeated builds (dependencies remain installed)
+Can access internal/private networks
+`Disadvantages`
+You must install, patch, and maintain the agent
+You are responsible for availability and security
+
+`When do companies use it?`
+Production deployments
+Applications inside private networks
+Large enterprise environments
+Specialized build environments
+
+
+Now We are creatinf CI Flow of CI
+
+>> Code push 
+    trigger CI
+    checkout source code
+    verify agent
+    install denpedancy
+    application validation
+    docker build
+    taging images
+    log in acr
+    push to acr
+    Public build information
+
+    pipeline skeleton - trigger
+                        pool  
+                        variables
+                        stages
+                          jobs 
+                            staps:
+`varibales`
+A variable is a named value that stores information which the pipeline can use during execution.
+
+Instead of hardcoding values, we store them in variables so they can be changed easily without modifying the pipeline.

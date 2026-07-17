@@ -4,16 +4,41 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: ubuntu-latest
+      vmImage: 'ubuntu-latest'
+ 
+variables: 
+  ImageRepository: 'shopping-backend'
+  dockerfilepath: 'backend/Dockerfile'
+  tag: '$(Build.BuildId)'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  stages:
+    stage: 'Build'
+    displayName: 'Build Stage'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    jobs: 
+      - job: BuildJob
+        displayName: 'Verify Build Agent'
+
+        steps:
+        - checkout: self
+        
+        - scripts: |
+              echo "Current Directory"
+              pwd
+
+              echo "Repository Files"
+              ls -la
+
+              echo "Docker-Version"
+              docker --version
+
+              echo "Docker-Compose-Version"
+              docker-compose --version
+          displayName: 'Verify Build Agent'
+
+
+
+
