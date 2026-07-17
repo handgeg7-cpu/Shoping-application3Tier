@@ -42,7 +42,9 @@ stages:
         npm install
       displayName: 'Install Dependencies'
 
+
     - script: |
+        cd backend
         docker build -t $(imageRepository):$(tag) -f $(dockerfilePath) .
       displayName: 'Build Docker Image'
 
