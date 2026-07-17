@@ -44,7 +44,7 @@ stages:
 
 
     - script: |
-        cd backend/Dockerfile
+        cd backend
         docker build -t $(imageRepository):$(tag) -f $(dockerfilePath)
       displayName: 'Build Docker Image'
 
