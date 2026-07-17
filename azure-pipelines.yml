@@ -14,30 +14,33 @@ variables:
   dockerfilepath: 'backend/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  stages:
-    stage: Build
-    displayName: 'Build Stage'
+stages:
+- stage: Build
+  displayName: 'Build Stage'
 
-    jobs: 
-      - job: BuildJob
-        displayName: 'Verify Build Agent'
+  jobs:
+  - job: BuildJob
+    displayName: 'Verify Build Agent'
 
-        steps:
-        - checkout: self
-        
-        - scripts: |
-              echo "Current Directory"
-              pwd
+    steps:
+    - checkout: self
 
-              echo "Repository Files"
-              ls -la
+    - script: |
+        echo "Current Directory:"
+        pwd
 
-              echo "Docker-Version"
-              docker --version
+        echo "Repository Files:"
+        ls -la
 
-              echo "Docker-Compose-Version"
-              docker-compose --version
-          displayName: 'Verify Build Agent'
+        echo "Docker Version:"
+        docker --version
+
+        echo "Node Version:"
+        node --version
+
+        echo "NPM Version:"
+        npm --version
+      displayName: 'Verify Build Agent'
 
 
 
