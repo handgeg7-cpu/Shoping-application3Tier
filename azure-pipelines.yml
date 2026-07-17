@@ -44,17 +44,14 @@ stages:
     - script: |
        echo "Current Directory:"
        pwd
-
-       echo "Build.SourcesDirectory:"
-       echo $(Build.SourcesDirectory)
-
+       
        echo "Repository Structure:"
        ls -R
       displayName: "Debug Repository Structure"
 
     - script: |
         cd backend
-        docker build -t $(imageRepository):$(tag) -f $(dockerfilePath) .
+         docker build -t $(imageRepository):$(tag) -f Dockerfile .
       displayName: 'Build Docker Image'
 
     - script: |
