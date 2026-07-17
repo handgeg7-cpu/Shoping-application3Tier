@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Northstar Studio</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">N</div>
+          <div>
+            <p class="eyebrow">Northstar Studio</p>
+            <h1>Curated essentials for everyday living</h1>
+          </div>
+        </div>
+        <div id="cart-count" class="cart-pill">Cart (0)</div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Spring / Summer 2026</p>
+          <h2>Modern pieces designed to look polished from morning to evening.</h2>
+          <p>Discover everyday favorites made with comfort, craftsmanship, and a thoughtful finish.</p>
+          <div class="hero-actions">
+            <a href="#products" class="primary-btn">Shop favorites</a>
+            <a href="#cart" class="secondary-btn">View cart</a>
+          </div>
+          <ul class="hero-highlights">
+            <li>Free shipping over $50</li>
+            <li>Hand-picked products</li>
+            <li>Fast delivery in 24h</li>
+          </ul>
+        </div>
+        <div class="hero-visual">
+          <img src="/images/hero.svg" alt="Stylish shopping illustration" />
+        </div>
+      </section>
+
+      <main class="content-grid">
+        <section class="catalog-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Featured collection</p>
+              <h3>Popular picks for your next refresh</h3>
+            </div>
+            <p class="section-copy">Each item is chosen for its finish, comfort, and everyday versatility.</p>
+          </div>
+          <div id="products" class="products-grid"></div>
+        </section>
+
+        <aside id="cart" class="cart-panel">
+          <div class="cart-card">
+            <div class="cart-card-header">
+              <div>
+                <p class="eyebrow">Your basket</p>
+                <h3>Ready to checkout</h3>
+              </div>
+              <span id="cart-badge" class="cart-badge">0 items</span>
+            </div>
+            <ul id="cart-items" class="cart-items"></ul>
+            <div class="cart-summary">
+              <div class="row"><span>Subtotal</span><strong>$<span id="cart-total">0.00</span></strong></div>
+              <div class="row muted"><span>Shipping</span><span>Free</span></div>
+              <div class="row total"><span>Total</span><strong>$<span id="cart-total-final">0.00</span></strong></div>
+            </div>
+            <button id="place-order" class="primary-btn full-width">Place order</button>
+          </div>
+        </aside>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
