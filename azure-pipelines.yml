@@ -1,17 +1,12 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-  - main
+- main
 
 pool:
-      vmImage: 'ubuntu-latest'
- 
-variables: 
-  ImageRepository: 'shopping-backend'
-  dockerfilepath: 'backend/Dockerfile'
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageRepository: 'shopping-backend'
+  dockerfilePath: 'backend/Dockerfile'
   tag: '$(Build.BuildId)'
 
 stages:
@@ -20,7 +15,7 @@ stages:
 
   jobs:
   - job: BuildJob
-    displayName: 'Verify Build Agent'
+    displayName: 'Build Job'
 
     steps:
     - checkout: self
@@ -42,6 +37,36 @@ stages:
         npm --version
       displayName: 'Verify Build Agent'
 
+    - script: |
+        cd backend
+        npm install
+      displayName: 'Install Dependencies'
 
+    - script: |
+        cd backend
+        npm test
+      displayName: 'Run Tests'
 
+    - script: |
+        docker build -t $(imageRepository):$(tag) -f $(dockerfilePath) .
+      displayName: 'Build Docker Image'
 
+    - script: |
+        docker images
+      displayName: 'List Docker Images'
+
+    - task: Docker@2
+      displayName: 'Login to Azure Container Registry'
+      inputs:
+        command: login
+        containerRegistry: 'shopingapp'
+
+    - task: Docker@2
+      displayName: 'Push Image'
+      inputs:
+        command: push
+        repository: '$(imageRepository)'
+        containerRegistry: 'shopingapp'
+        tags: |
+          $(tag)
+          latest
