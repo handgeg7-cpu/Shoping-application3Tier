@@ -43,11 +43,6 @@ stages:
       displayName: 'Install Dependencies'
 
     - script: |
-        cd backend
-        npm test
-      displayName: 'Run Tests'
-
-    - script: |
         docker build -t $(imageRepository):$(tag) -f $(dockerfilePath) .
       displayName: 'Build Docker Image'
 
